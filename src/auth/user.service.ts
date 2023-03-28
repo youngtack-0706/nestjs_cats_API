@@ -4,6 +4,7 @@ import { FindOneOptions, Repository } from "typeorm";
 import { UserDTO } from "./dto/user.dto";
 import { User } from "./entity/user.entity";
 import { UserRepository } from "./user.repository";
+import * as bcrypt from "bcrypt";
 
 @Injectable()
 export class UserService{
@@ -19,7 +20,17 @@ export class UserService{
         return await this.userRepositroy.findOne(options);
     }
 
-    async save(user: UserDTO): Promise<User| undefined>{
-        return await this.userRepositroy.save(user);
+    async save(userDTO: UserDTO): Promise<User| undefined>{
+        console.log("before transfrom password: ",userDTO.password);
+        await this.transformPassword(userDTO);
+        console.log("after transfrom password: ",userDTO.password);
+        return await this.userRepositroy.save(userDTO);
+    }
+
+    async transformPassword(user: UserDTO): Promise<void>{
+        user.password = await bcrypt.hash(
+            user.password, 10,
+        );
+        return Promise.resolve();
     }
 }
