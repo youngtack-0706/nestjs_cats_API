@@ -46,4 +46,10 @@ export class AuthService {
             };
         }
     }
+
+    async tokenValidateUser(payload: Payload): Promise<User |undefined>{
+        return await  this.userService.findByFileds({
+            where: { id : payload.id }
+        })
+    }
 }
