@@ -7,6 +7,7 @@ import { Cat } from './cats/entity/cats.entity';
 import { AuthModule } from './auth/auth.module';
 import { UserService } from './auth/user.service';
 import { User } from './auth/entity/user.entity';
+import { UserAuthority } from './auth/entity/user-authority.entity';
 
 @Module({
   imports: [
@@ -17,8 +18,9 @@ import { User } from './auth/entity/user.entity';
       username: 'root',
       password: 'qlslfn1234',
       database: 'nestjs',
-      entities: [Cat, User],
-      synchronize: true,
+      entities: [Cat, User, UserAuthority],
+      synchronize: false,
+      logging: true,
     }),
     CatsModule,
     AuthModule,],

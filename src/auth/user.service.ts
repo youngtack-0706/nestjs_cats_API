@@ -3,7 +3,7 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { FindOneOptions, Repository } from "typeorm";
 import { UserDTO } from "./dto/user.dto";
 import { User } from "./entity/user.entity";
-import { UserRepository } from "./user.repository";
+import { UserRepository } from "./repository/user.repository";
 import * as bcrypt from "bcrypt";
 
 @Injectable()
