@@ -3,6 +3,9 @@ import { AuthService } from './auth.service';
 import { UserDTO } from './dto/user.dto';
 import { Request, Response } from 'express';
 import { AuthGuard } from './security/auth.guard';
+import { RolesGuard } from './security/roles.guard';
+import { RoleType } from './role-type';
+import { Roles } from './config/role.decorator';
 
 @Controller('auth')
 export default class AuthController {
@@ -29,5 +32,14 @@ export default class AuthController {
         const user: any = req.user;
         return user;
     }
+
+    @Get('/admin-role')
+    @UseGuards(AuthGuard, RolesGuard)
+    @Roles(RoleType.ADMIN)
+    adminRoleCheck(@Req() req: Request): any {
+        const user: any = req.user;
+        return user;
+    }
+
 
 }
