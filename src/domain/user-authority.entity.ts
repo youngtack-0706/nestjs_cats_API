@@ -15,5 +15,4 @@ export class UserAuthority{
     @ManyToOne(type=>User, user=>user.authorities)
     @JoinColumn({name: 'user_id'})
     user: User
-    
 }

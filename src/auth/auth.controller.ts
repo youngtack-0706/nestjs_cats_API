@@ -40,6 +40,4 @@ export default class AuthController {
         const user: any = req.user;
         return user;
     }
-
-
 }

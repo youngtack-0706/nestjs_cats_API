@@ -15,6 +15,7 @@ export class User{
     @Column()
     password: string;
 
+    //eager 조인하는 값 모두 가져오기 one쪽에 설정해야함(?)
     @OneToMany(type=>UserAuthority, userAuthority=>userAuthority.user, {eager: true})
     authorities?: any[];
 }
